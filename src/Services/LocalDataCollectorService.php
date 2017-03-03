@@ -5,17 +5,24 @@ namespace  RonasIT\Support\LocalDataCollector\Services;
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use RonasIT\Support\LocalDataCollector\Exceptions\CannotFindTemporaryFileException;
+use RonasIT\Support\AutoDoc\Interfaces\DataCollectorInterface;
 
-class LocalDataCollectorService
+class LocalDataCollectorService implements DataCollectorInterface
 {
     protected $filePath;
+    protected $tempFilePath;
 
     public function __construct()
     {
         $this->filePath = config('local-data-collector.production_path');
+        $this->tempFilePath = config('local-data-collector.temporary_path');
+
+        if (empty($this->tempFilePath)) {
+            throw new CannotFindTemporaryFileException();
+        }
 
         if (empty($this->filePath)) {
-            throw new CannotFindTemporaryFileException();
+            throw new MissedProductionFilePathException();
         }
     }
 
