@@ -15,8 +15,7 @@ class MissedProductionFilePathException extends Exception
 {
     public function __construct($message = "", $code = 0, Exception $previous = null)
     {
-        parent::__construct(
-            "Production file path missed in config.",
-            $code, $previous);
+        $message = $message ?? "Production file path missed in config.";
+        parent::__construct($message, $code, $previous);
     }
 }

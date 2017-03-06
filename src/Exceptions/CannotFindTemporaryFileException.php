@@ -15,8 +15,7 @@ class CannotFindTemporaryFileException extends Exception
 {
     public function __construct($message = "", $code = 0, Exception $previous = null)
     {
-        parent::__construct(
-            "Cannot find temporary file. Please check destination path and config",
-            $code, $previous);
+        $message = $message ?? "Cannot find temporary file. Please check destination path and config";
+        parent::__construct($message, $code, $previous);
     }
 }
