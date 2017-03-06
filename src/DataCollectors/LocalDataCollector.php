@@ -1,13 +1,13 @@
 <?php
 
-namespace  RonasIT\Support\LocalDataCollector\Services;
+namespace  RonasIT\Support\DataCollectors;
 
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use RonasIT\Support\LocalDataCollector\Exceptions\CannotFindTemporaryFileException;
 use RonasIT\Support\AutoDoc\Interfaces\DataCollectorInterface;
 
-class LocalDataCollectorService implements DataCollectorInterface
+class LocalDataCollector implements DataCollectorInterface
 {
     protected $filePath;
     protected $tempFilePath;
