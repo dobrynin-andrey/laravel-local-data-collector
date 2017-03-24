@@ -4,38 +4,57 @@ namespace  RonasIT\Support\DataCollectors;
 
 
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use RonasIT\Support\LocalDataCollector\Exceptions\CannotFindTemporaryFileException;
+use RonasIT\Support\DataCollectors\Exceptions\CannotFindTemporaryFileException;
 use RonasIT\Support\AutoDoc\Interfaces\DataCollectorInterface;
+use RonasIT\Support\DataCollectors\Exceptions\MissedProductionFilePathException;
 
 class LocalDataCollector implements DataCollectorInterface
 {
-    protected $filePath;
-    protected $tempFilePath;
+    public $prodFilePath;
+    public $tempFilePath;
 
     public function __construct()
     {
-        $this->filePath = config('local-data-collector.production_path');
+        $this->prodFilePath = config('local-data-collector.production_path');
         $this->tempFilePath = config('local-data-collector.temporary_path');
 
         if (empty($this->tempFilePath)) {
             throw new CannotFindTemporaryFileException();
         }
 
-        if (empty($this->filePath)) {
+        if (empty($this->prodFilePath)) {
             throw new MissedProductionFilePathException();
         }
     }
 
+    public function saveTmpData($tempData) {
+        $data = json_encode($tempData);
+
+        file_put_contents($this->tempFilePath, $data);
+    }
+
+    public function getTmpData() {
+        if (file_exists($this->tempFilePath)) {
+            $content = file_get_contents($this->tempFilePath);
+
+            return json_decode($content, true);
+        }
+
+        return null;
+    }
+
     public function saveData($tempData){
-        rename($tempData, $this->filePath);
+        $content = json_encode($tempData);
+
+        file_put_contents($this->prodFilePath, $content);
     }
 
     public function getFileContent() {
-        if (!file_exists($this->filePath)) {
+        if (!file_exists($this->prodFilePath)) {
             throw new FileNotFoundException();
         }
 
-        $fileContent = file_get_contents($this->filePath);
+        $fileContent = file_get_contents($this->prodFilePath);
 
         return json_decode($fileContent);
     }
