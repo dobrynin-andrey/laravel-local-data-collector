@@ -7,7 +7,7 @@
  * Time: 17:56
  */
 
-namespace RonasIT\Support\LocalDataCollector\Exceptions;
+namespace RonasIT\Support\DataCollectors\Exceptions;
 
 use Exception;
 
