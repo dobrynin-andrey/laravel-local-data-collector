@@ -47,6 +47,8 @@ class LocalDataCollector implements DataCollectorInterface
         $content = json_encode($tempData);
 
         file_put_contents($this->prodFilePath, $content);
+
+        unlink($this->tempFilePath);
     }
 
     public function getFileContent() {
