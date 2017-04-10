@@ -51,7 +51,7 @@ class LocalDataCollector implements DataCollectorInterface
         unlink($this->tempFilePath);
     }
 
-    public function getFileContent() {
+    public function getDocumentation() {
         if (!file_exists($this->prodFilePath)) {
             throw new FileNotFoundException();
         }
