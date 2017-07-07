@@ -43,7 +43,9 @@ class LocalDataCollector implements DataCollectorInterface
         return null;
     }
 
-    public function saveData($tempData){
+    public function saveData(){
+        $tempData = $this->getTmpData();
+
         $content = json_encode($tempData);
 
         file_put_contents($this->prodFilePath, $content);
