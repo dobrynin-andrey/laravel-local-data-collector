@@ -1,6 +1,6 @@
 {
   "name": "ronasit/local-data-collector",
-  "version" : "1.0.1",
+  "version" : "1.0.2",
   "description": "Provides service for data collecting for ronasit/laravel-swagger plugin",
   "keywords": ["laravel", "swagger", "ronasit", "auto-documentation", "rest-api"],
   "license": "MIT",
@@ -14,7 +14,7 @@
     "php": ">=5.6",
     "laravel/framework": ">=5.3.0",
     "minime/annotations": "2.3.1",
-    "ronasit/laravel-swagger": "1.1.*"
+    "ronasit/laravel-swagger": "1.1.*|1.2.*"
   },
   "autoload": {
     "psr-4": {
