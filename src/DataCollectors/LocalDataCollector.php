@@ -13,14 +13,11 @@ class LocalDataCollector implements DataCollectorInterface
     public $prodFilePath;
     public $tempFilePath;
 
+    protected static $data;
+
     public function __construct()
     {
         $this->prodFilePath = config('local-data-collector.production_path');
-        $this->tempFilePath = config('local-data-collector.temporary_path');
-
-        if (empty($this->tempFilePath)) {
-            throw new CannotFindTemporaryFileException();
-        }
 
         if (empty($this->prodFilePath)) {
             throw new MissedProductionFilePathException();
@@ -28,27 +25,19 @@ class LocalDataCollector implements DataCollectorInterface
     }
 
     public function saveTmpData($tempData) {
-        $data = json_encode($tempData);
-
-        file_put_contents($this->tempFilePath, $data);
+        self::$data = $tempData;
     }
 
     public function getTmpData() {
-        if (file_exists($this->tempFilePath)) {
-            $content = file_get_contents($this->tempFilePath);
-
-            return json_decode($content, true);
-        }
-
-        return null;
+        return self::$data;
     }
 
-    public function saveData($tempData){
-        $content = json_encode($tempData);
+    public function saveData(){
+        $content = json_encode(self::$data);
 
         file_put_contents($this->prodFilePath, $content);
 
-        unlink($this->tempFilePath);
+        self::$data = [];
     }
 
     public function getDocumentation() {
