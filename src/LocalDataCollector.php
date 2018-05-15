@@ -2,9 +2,7 @@
 
 namespace  RonasIT\Support\DataCollectors;
 
-
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use RonasIT\Support\DataCollectors\Exceptions\CannotFindTemporaryFileException;
 use RonasIT\Support\AutoDoc\Interfaces\DataCollectorInterface;
 use RonasIT\Support\DataCollectors\Exceptions\MissedProductionFilePathException;
 
