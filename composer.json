@@ -13,7 +13,7 @@
     "php": ">=5.6",
     "laravel/framework": ">=5.3.0",
     "minime/annotations": "2.3.1",
-    "ronasit/laravel-swagger": "1.1.*"
+    "ronasit/laravel-swagger": ">=1.1.*"
   },
   "autoload": {
     "psr-4": {
