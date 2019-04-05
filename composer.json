@@ -20,6 +20,7 @@
           "url": "https://github.com/dobrynin-andrey/laravel-helpers"
       }
   ],
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "RonasIT\\Support\\DataCollectors\\": "src/"
